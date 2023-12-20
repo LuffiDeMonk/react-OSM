@@ -18,13 +18,13 @@ export default function LocationContainer() {
     const [location, setLocation] = useState<latlng | null>(null);
 
     useEffect(() => {
-
-
-        navigator.geolocation.getCurrentPosition((position) => {
+        let id = navigator.geolocation.watchPosition((position) => {
             setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
-        }, () => console.log('Location loaded successfully'))
-
-    }, [location])
+        }, () => alert('Please allow location access to the application'), { enableHighAccuracy: true })
+        return () => {
+            navigator.geolocation.clearWatch(id)
+        }
+    }, [])
 
     if (location === null) {
         return (<h1>Map loading...</h1>)
