@@ -18,14 +18,12 @@ export default function LocationContainer() {
     const [location, setLocation] = useState<latlng | null>(null);
 
     useEffect(() => {
-        if (!('geolocation' in navigator)) {
-            console.warn('Allow location access')
-        } else {
 
-            navigator.geolocation.getCurrentPosition((position) => {
-                setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
-            }, () => console.log('Location loaded successfully'))
-        }
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
+        }, () => console.log('Location loaded successfully'))
+
     }, [location])
 
     if (location === null) {
