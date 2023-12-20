@@ -24,7 +24,7 @@ export default function LocationContainer() {
 
             navigator.geolocation.getCurrentPosition((position) => {
                 setLocation({ lat: position.coords.latitude, lng: position.coords.longitude })
-            })
+            }, () => console.log('Location loaded successfully'))
         }
     }, [location])
 
@@ -38,7 +38,7 @@ export default function LocationContainer() {
                 <MapContainer center={location} zoom={10} scrollWheelZoom={false} style={{ height: '90vh' }}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=yMRZZ5iBww7qbMkAjHHx"
+                        url="https://api.maptiler.com/maps/openstreetmap/256/{z}/{x}/{y}.jpg?key=yMRZZ5iBww7qbMkAjHHx"
                     />
                     {/* <LocationMarker /> */}
                     <Marker position={location} icon={CustomMarker} />
